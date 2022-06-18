@@ -7,6 +7,27 @@ services:
     ports:
       - 80:80
     restart: always
+  
+  mongodb:
+    public: true
+    container_name: mongodb
+    image: docker.io/bitnami/mongodb:5.0
+    environment:
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+      - MONGODB_ROOT_USER=${MONGODB_ROOT_USER}
+      - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+      - MONGODB_USERNAME=${MONGODB_USERNAME}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGODB_SYSTEM_LOG_VERBOSITY=${MONGODB_SYSTEM_LOG_VERBOSITY}
+      - MONGODB_DISABLE_SYSTEM_LOG=${MONGODB_DISABLE_SYSTEM_LOG}
+    ports:
+      - "27017:27017"
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'  
+  
   nginx:
     image: nginx_image
     container_name: nginx_container
@@ -16,15 +37,7 @@ services:
     restart: always
     depends_on:
       - reverseproxy
-  apache:
-    image: apache_image
-    container_name: apache_container
-    build: ./apache
-    ports:
-      - 80
-    restart: always
-    depends_on:
-      - reverseproxy
+ 
   node:
     image: node_image
     container_name: node_container
@@ -43,3 +56,46 @@ services:
     restart: always
     depends_on:
       - reverseproxy
+   
+  node-red:
+    public: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Asia/Tokyo
+      - DB_HOST=mongodb://mongodb:27017
+      - secret=dev
+    ports:
+      - 1881
+    volumes:
+      - node-red1:/home/94r4d0x/.node-red
+    links:
+      - mongodb
+     depends_on:
+      - reverseproxy
+   node-red:
+    public: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Asia/Tokyo
+      - DB_HOST=mongodb://mongodb:27017
+      - secret=dev
+    ports:
+      - 1882
+    volumes:
+      - node-red2:/home/94r4d0x/.node-red
+    links:
+      - mongodb
+     depends_on:
+      - reverseproxy
+volumes:
+  node-red1:
+    size: 1.5Gi
+   node-red2:
+    size: 1.5Gi
+  mongodb_data:
+    driver: local
+    size: 2Gi
