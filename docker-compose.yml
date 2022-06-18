@@ -47,6 +47,7 @@ services:
     restart: always
     depends_on:
       - reverseproxy
+      
   node2:
     image: node2_image
     container_name: node2_container
@@ -57,7 +58,7 @@ services:
     depends_on:
       - reverseproxy
    
-  node-red1:
+  node-red:
     public: true
     build: ./node-red1
     environment:
@@ -73,7 +74,7 @@ services:
      depends_on:
       - reverseproxy
       
-   node-red2:
+   node-red:
     public: true
     build: ./node-red1
     environment:
