@@ -57,11 +57,11 @@ services:
     depends_on:
       - reverseproxy
    
-  node-red:
+  node-red1:
     public: true
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./node-red1/Dockerfile
     environment:
       - TZ=Asia/Tokyo
       - DB_HOST=mongodb://mongodb:27017
@@ -74,11 +74,11 @@ services:
       - mongodb
      depends_on:
       - reverseproxy
-   node-red:
+   node-red2:
     public: true
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./node-red2/Dockerfile
     environment:
       - TZ=Asia/Tokyo
       - DB_HOST=mongodb://mongodb:27017
