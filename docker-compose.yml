@@ -59,9 +59,7 @@ services:
    
   node-red1:
     public: true
-    build:
-      context: .
-      dockerfile: ./node-red1/Dockerfile
+    build: ./node-red1
     environment:
       - TZ=Asia/Tokyo
       - DB_HOST=mongodb://mongodb:27017
@@ -74,11 +72,10 @@ services:
       - mongodb
      depends_on:
       - reverseproxy
+      
    node-red2:
     public: true
-    build:
-      context: .
-      dockerfile: ./node-red1/Dockerfile
+    build: ./node-red1
     environment:
       - TZ=Asia/Tokyo
       - DB_HOST=mongodb://mongodb:27017
