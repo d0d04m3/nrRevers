@@ -44,7 +44,7 @@ services:
       - reverseproxy
  
    
-  nsr1:
+  nrs1:
     public: true
     build: ./node-red1
     environment:
@@ -60,7 +60,7 @@ services:
     depends_on:
       - reverseproxy
       
-  nsr2:
+  nrs2:
     public: true
     build: ./node-red1
     environment:
