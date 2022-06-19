@@ -81,12 +81,12 @@ services:
       
 volumes:
   node-red1:
-    size: 1.5Gi
+    size: 1Gi
   node-red2:
-    size: 1.5Gi
+    size: 1Gi
   mongodb_data:
     driver: local
-    size: 2Gi
+    size: 1Gi
     
 networks:
   pic:
