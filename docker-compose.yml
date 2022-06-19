@@ -91,6 +91,4 @@ volumes:
 networks:
   pic:
     driver: host
-networks:
-    pic:
-      driver: bridge
+
