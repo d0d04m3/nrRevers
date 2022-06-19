@@ -78,9 +78,9 @@ services:
       
 volumes:
   node-red1:
-    size: 5Mi
+    size: 500Mi
   node-red2:
-    size: 5MGi
+    size: 500MGi
   mongodb_data:
     driver: local
     size: 0.8Gi
