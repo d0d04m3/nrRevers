@@ -7,6 +7,11 @@ services:
     ports:
       - 80:80
     restart: always
+    networks:
+      - pic
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
   
   mongodb:
     public: true
@@ -75,10 +80,12 @@ volumes:
   node-red1:
     size: 500Mi
   node-red2:
-    size: 500MGi
+    size: 500Mi
   mongodb_data:
     driver: local
     size: 0.8Gi
     
+networks:
+  pic:
+    driver: host
     
-
