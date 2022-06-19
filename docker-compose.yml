@@ -47,7 +47,7 @@ services:
       - reverseproxy
 
    
-  node-red1:
+  nrs1:
     public: true
     build: ./node-red1
     environment:
@@ -63,7 +63,7 @@ services:
     depends_on:
       - reverseproxy
       
-  node-red2:
+  nrs2:
     public: true
     build: ./node-red1
     environment:
@@ -87,6 +87,7 @@ volumes:
   mongodb_data:
     driver: local
     size: 2Gi
+    
 networks:
   pic:
     driver: host
