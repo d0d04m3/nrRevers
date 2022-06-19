@@ -58,7 +58,7 @@ services:
     depends_on:
       - reverseproxy
    
-  node-red:
+  node-red1:
     public: true
     build: ./node-red1
     environment:
@@ -71,10 +71,10 @@ services:
       - node-red1:/home/94r4d0x/.node-red
     links:
       - mongodb
-     depends_on:
+    depends_on:
       - reverseproxy
       
-   node-red:
+  node-red2:
     public: true
     build: ./node-red1
     environment:
@@ -87,12 +87,13 @@ services:
       - node-red2:/home/94r4d0x/.node-red
     links:
       - mongodb
-     depends_on:
+    depends_on:
       - reverseproxy
+      
 volumes:
-  node-red:
+  node-red1:
     size: 3Gi
-   node-red2:
+  node-red2:
     size: 1.5Gi
   mongodb_data:
     driver: local
