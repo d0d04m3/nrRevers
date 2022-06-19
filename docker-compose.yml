@@ -7,6 +7,11 @@ services:
     ports:
       - 80:80
     restart: always
+    networks:
+      - pic
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
   
   mongodb:
     public: true
@@ -38,27 +43,8 @@ services:
     depends_on:
       - reverseproxy
  
-  node:
-    image: node_image
-    container_name: node_container
-    build: ./node
-    ports:
-      - 3000
-    restart: always
-    depends_on:
-      - reverseproxy
-      
-  node2:
-    image: node2_image
-    container_name: node2_container
-    build: ./node2
-    ports:
-      - 3000
-    restart: always
-    depends_on:
-      - reverseproxy
    
-  node-red1:
+  nsr1:
     public: true
     build: ./node-red1
     environment:
@@ -74,7 +60,7 @@ services:
     depends_on:
       - reverseproxy
       
-  node-red2:
+  nsr2:
     public: true
     build: ./node-red1
     environment:
@@ -92,9 +78,15 @@ services:
       
 volumes:
   node-red1:
-    size: 1.5Gi
+    size: 5Mi
   node-red2:
-    size: 1.5Gi
+    size: 5MGi
   mongodb_data:
     driver: local
-    size: 2Gi
+    size: 0.8Gi
+    
+networks:
+  pic:
+    driver: host
+    
+
