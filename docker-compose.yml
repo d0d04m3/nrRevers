@@ -7,11 +7,6 @@ services:
     ports:
       - 80:80
     restart: always
-    networks:
-      - pic
-    dns:
-      - 8.8.8.8
-      - 8.8.4.4
   
   mongodb:
     public: true
@@ -85,8 +80,5 @@ volumes:
     driver: local
     size: 0.8Gi
     
-networks:
-  pic:
-    driver: host
     
 
