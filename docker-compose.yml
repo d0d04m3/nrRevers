@@ -3,7 +3,9 @@ services:
   reverseproxy:
     image: reverseproxy_image
     container_name: reverseproxy_container
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.revers
     ports:
       - 80:80
     restart: always
